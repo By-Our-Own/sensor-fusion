@@ -1,0 +1,3 @@
+[submodule "3rd-party/TinyEKF"]
+	path = 3rd-party/TinyEKF
+	url = git@github.com:By-Our-Own/TinyEKF.git
