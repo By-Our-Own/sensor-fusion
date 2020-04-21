@@ -3,8 +3,9 @@
 '''
 baros_fuser.py - BMP388 / LPS22HH fusion example using TinyEKF.
 
-We model a single state variable, altitude above sea level (ASL) in centimeters.
-This is obtained by fusing two barometer pressure readings in Pascals.
+We model a single state variable, altitude above sea level (ASL) in
+centimeters. This is obtained by fusing two barometer pressure readings in
+Pascals.
 
 This is not much of a use. Just an warm-up on using the library
 '''
@@ -34,7 +35,7 @@ class ASL_EKF(EKF):
         # larger-than-usual measurement covariance noise.
         EKF.__init__(self, 1, 2, rval=.1)
 
-    def f(self, x):
+    def f(self, x, _):
         # State-transition function is identity
         return np.copy(x), np.eye(1)
 
@@ -89,7 +90,7 @@ class App():
             # Fused state comes back as an array, so grab first element and
             # append it to the fused values list.
             self.fused.append(
-                    self.ekf.step((self.baro, self.sonar))[0] / 100)
+                    self.ekf.step((self.baro, self.sonar), _)[0] / 100)
 
     def plot(self):
         import matplotlib.pyplot as plt
