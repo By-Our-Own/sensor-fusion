@@ -13,6 +13,8 @@ This is not much of a use. Just an warm-up on using the library
 import numpy as np
 from tinyekf import EKF
 
+RAW_DATA_PATH = '../../raw_data/'
+
 
 # Convert ASL cm to Pascals. See:
 # http://www.engineeringtoolbox.com/air-altitude-pressure-d_462.html
@@ -63,8 +65,12 @@ class App():
         self.ekf = ASL_EKF()
 
         # Read pressure values for the two sensors
-        self.y_bmp = np.loadtxt('press_bmp.txt', delimiter='\n', unpack=True)
-        self.y_lps = np.loadtxt('press_lps.txt', delimiter='\n', unpack=True)
+        self.y_bmp = np.loadtxt(RAW_DATA_PATH +
+                                'pressure_static_point_1sec/press_bmp388.txt',
+                                delimiter='\n', unpack=True)
+        self.y_lps = np.loadtxt(RAW_DATA_PATH +
+                                'pressure_static_point_1sec/press_lps22hh.txt',
+                                delimiter='\n', unpack=True)
         self.num_samples = len(self.y_bmp)
 
         # Generate the timestamps
